@@ -10,7 +10,8 @@ export default function Home() {
 
         <div className="flex gap-4 items-center flex-col sm:flex-row">
     <div className="text-6xl">Hello</div>
-  
+    <Image src="/globe.svg" alt="globe" width="100" height="100" />
+   
         </div>
       </main>
      

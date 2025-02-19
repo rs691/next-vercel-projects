@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# TABLE RELATIONSHIPS
 
-## Getting Started
+Users → Customers (One-to-One)
 
-First, run the development server:
+Each registered user can have one customer profile
+Links via user_id foreign key
+Enables tracking of both authentication and detailed customer information
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Customers → Reservations (One-to-Many)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+One customer can make multiple reservations
+customer_id links reservations to specific customers
+Tracks full reservation history per customer
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Customers → Contact Messages (One-to-Many)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Customers can send multiple contact messages
+-- Optional relationship via customer_id
+Allows tracking of all customer communications
 
-## Learn More
+Customers → Customer Preferences (One-to-One)
 
-To learn more about Next.js, take a look at the following resources:
+Each customer has a single preferences record
+Stores personalized customer settings and preferences
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+CRITICAL CONSTRAINTS:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Email validation across users and contact messages
+Date validation in reservations
+Price and capacity constraints in rooms
+Session token and expiration management
 
-## Deploy on Vercel
+RECOMMENDED IMPLEMENTATION CONSIDERATIONS:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Use prepared statements for security
+Implement database-level encryption for sensitive fields
+Create regular backup procedures
+Set up proper indexing for performance
+Implement soft delete where possible
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+POTENTIAL FUTURE EXTENSIONS:
+
+Add loyalty program tracking
+Implement more detailed customer segmentation
+Create advanced reporting tables
